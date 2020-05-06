@@ -26,3 +26,14 @@ table td:nth-child(2n) {
     justify-content: center;
     align-items: center;
 }
+
+.btn-link{
+    font-size: 12px;
+    cursor: pointer;
+    color: gray;
+}
+
+.img-size{
+    width: 315px;
+    height: 300px;
+}

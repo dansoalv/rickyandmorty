@@ -8,7 +8,10 @@ import {
     GET_CHARACTER,
     UPDATE_CHARACTER_INIT,
     UPDATE_CHARACTER_FAIL,
-    UPDATE_CHARACTER_SUCCESS
+    UPDATE_CHARACTER_SUCCESS,
+    GET_CHARACTER_DELETE,
+    CHARACTER_DELETE_SUCCESS,
+    CHARACTER_DELETE_FAIL
 } from './../Types/types'
 import clientAxios from "../Config/axios";
 import Swal from 'sweetalert2'
@@ -122,5 +125,38 @@ const updateCharacterSuccess = character => ({
 
 const updateCharacterFail = state => ({
     type: UPDATE_CHARACTER_FAIL,
+    payload: state
+})
+
+
+export function deleteCharacter(id) {
+    return (dispatch) => {
+        dispatch(getCharacterDelete(id))
+
+        try {
+            dispatch( deleteCharacterSuccess() );
+            Swal.fire(
+                'Eliminado',
+                'El personaje se eliminó correctamente',
+                'success'
+            )
+        } catch (error) {
+            console.log(error);
+            dispatch( deleteCharacterFail(true) );
+        }
+    }
+}
+
+const getCharacterDelete = (id) => ({
+    type: GET_CHARACTER_DELETE,
+    payload: id
+})
+
+const deleteCharacterSuccess = () => ({
+    type: CHARACTER_DELETE_SUCCESS
+})
+
+const deleteCharacterFail = (state) => ({
+    type: CHARACTER_DELETE_FAIL,
     payload: state
 })
